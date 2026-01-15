@@ -274,6 +274,12 @@ Le Code forestier encadre leur gestion durable pour protéger la biodiversité, 
 
     st.header("🌲 Zoom sur le taux de boisement des différents départements français")
 
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("images/boisement.png", caption="Taux de boisement par département en France en 2024 (source : IGN)", use_container_width=True)
+
+    st.write("""---""")
+
     col1, col2, col3 = st.columns([1,1,1])
 
     with col1:
