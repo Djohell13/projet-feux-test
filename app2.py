@@ -70,8 +70,8 @@ if "css_injected" not in st.session_state:
     st.session_state.css_injected = True
 
 #-------------------------------------------------------- Configuration AWS S3 ---------------------------------------------------
-aws_access_key_id = st.secrets("AWS_ACCESS_KEY_ID")
-aws_secret_access_key = st.secrets("AWS_SECRET_ACCESS_KEY")
+aws_access_key_id = st.secrets["AWS_ACCESS_KEY_ID"]
+aws_secret_access_key = st.secrets["AWS_SECRET_ACCESS_KEY"]
 aws_region = "eu-west-3"
 
 s3 = boto3.client(
