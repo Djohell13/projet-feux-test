@@ -1,4 +1,4 @@
-streamlit==1.26.0
+streamlit>=1.27.0
 pandas
 numpy
 scikit-learn
@@ -8,7 +8,7 @@ boto3
 folium
 branca
 streamlit-folium
-Pillow==12.1.0
+Pillow>=12
 xgboost
 joblib
 lifelines
