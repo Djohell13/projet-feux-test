@@ -12,3 +12,4 @@ Pillow>=12
 xgboost
 joblib
 lifelines
+mlflow==2.21.3
