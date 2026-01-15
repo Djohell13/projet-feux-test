@@ -8,7 +8,7 @@ boto3
 folium
 branca
 streamlit-folium
-Pillow
+Pillow==12.1.0
 xgboost
 joblib
 lifelines
