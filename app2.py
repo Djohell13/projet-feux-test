@@ -109,20 +109,6 @@ with header:
 # ------------------------------- Tabs ---------------------------------------
 content = st.container()
 with content:
-    # # CSS des tabs
-    # st.markdown("""
-    #     <style>
-    #         button[data-baseweb="tab"] {
-    #             font-size: 20px !important;
-    #             font-weight: 600;
-    #             padding: 10px 18px;
-    #         }
-    #         button[data-baseweb="tab"][aria-selected="true"] {
-    #             color: #1f77b4;
-    #             border-bottom: 3px solid #1f77b4;
-    #         }
-    #     </style>
-    # """, unsafe_allow_html=True)
 
     page_tabs = st.tabs([
         "Notre Projet",
@@ -284,13 +270,13 @@ Le Code forestier encadre leur gestion durable pour protéger la biodiversité, 
     col1, col2, col3 = st.columns([1,1,1])
 
     with col1:
-        st.image("images/puits carbone.png", caption="Puits de carbone", width=300)
+        st.image("images/puits carbone.png", caption="Puits de carbone", width=400)
 
     with col2:
-        st.image("images/racines.png", caption="Limitation de l'érosion", width=300)
+        st.image("images/racines.png", caption="Limitation de l'érosion", width=500)
 
     with col3:
-        st.image("images/rayonnement.png", caption="Limitation du rayonnement solaire", width=300)
+        st.image("images/rayonnement.png", caption="Limitation du rayonnement solaire", width=400)
 
     st.write("""---""")
 
