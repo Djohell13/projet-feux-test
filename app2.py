@@ -280,6 +280,7 @@ Le Code forestier encadre leur gestion durable pour protéger la biodiversité, 
 
     st.write("""---""")
 
+    st.header(" Quels sont les principaux rôles de la forêt ?")
     col1, col2, col3 = st.columns([1,1,1])
 
     with col1:
