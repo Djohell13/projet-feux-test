@@ -445,7 +445,7 @@ with page_tabs[1]:
     use_container_width=True
     )
 
-        st.info(""" Sans grande surprise, on observe une saisonnalité marquée des incendies, avec un pic significatif durant les mois de juillet et août.
+    st.info(""" Sans grande surprise, on observe une saisonnalité marquée des incendies, avec un pic significatif durant les mois de juillet et août.
     """)
 
     st.write("""---""")
@@ -484,11 +484,11 @@ with page_tabs[1]:
     #     else:
     #         st.warning("⚠️ La colonne 'Nature' est absente du DataFrame.")
 
-        st.info("""
-                📌 **À retenir** : 
-                L’analyse des causes révèle que la majorité des incendies sont d’origine humaine, soulignant l’importance de la prévention et de la sensibilisation pour réduire ces incidents.""")
+    st.info("""
+    📌 **À retenir** : 
+    L’analyse des causes révèle que la majorité des incendies sont d’origine humaine, soulignant l’importance de la prévention et de la sensibilisation pour réduire ces incidents.""")
 
-        st.write("""---""")
+    st.write("""---""")
 
         # ---------------------------------------------------- Nombre total d’incendies par année ----------------------------------
         # if "Date" in df_histo.columns:
@@ -518,7 +518,7 @@ with page_tabs[1]:
     use_container_width=True
     )
 
-        st.info("""L'année 2022 fut une année noire avec un nombre record d'incendies, notamment une surface brûlée de 60 000 ha, soit l'équivalent de 
+    st.info("""L'année 2022 fut une année noire avec un nombre record d'incendies, notamment une surface brûlée de 60 000 ha, soit l'équivalent de 
                     84 000 terrains de football, ou encore 5,7 fois la surface de Paris intra-muros.""")
 
         # ---------------------------------------------------- Top départements
