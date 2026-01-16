@@ -403,11 +403,11 @@ with page_tabs[1]:
     use_container_width=True
     )
 
-        st.info("""
-📌 **À retenir**  
-Ce graphique met en évidence une forte hétérogénéité territoriale.  
-Les départements les plus touchés concentrent une part disproportionnée des incendies, ce qui motive une approche prédictive ciblée.
-""")
+    st.info("""
+    📌 **À retenir**  
+    Ce graphique met en évidence une forte hétérogénéité territoriale.  
+    Les départements les plus touchés concentrent une part disproportionnée des incendies, ce qui motive une approche prédictive ciblée.
+    """)
     
     st.write("""---""")
 
@@ -446,7 +446,7 @@ Les départements les plus touchés concentrent une part disproportionnée des i
     )
 
         st.info(""" Sans grande surprise, on observe une saisonnalité marquée des incendies, avec un pic significatif durant les mois de juillet et août.
-""")
+    """)
 
     st.write("""---""")
 
