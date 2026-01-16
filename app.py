@@ -529,11 +529,11 @@ Les départements les plus touchés concentrent une part disproportionnée des i
     #     st.plotly_chart(fig)
 
     image = Image.open("images/departement.png")
-st.image(
+    st.image(
     image,
     caption="Top 10 des départements les plus touchés par les incendies",
     use_column_width=True
-)
+    )
 
     st.info("""Après analyse, la Corse se démarque nettement comme le département le plus touché par les incendies de forêt en France, justifiant ainsi notre choix de focus pour la suite de notre projet.""")
 
