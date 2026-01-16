@@ -138,19 +138,6 @@ def load_model_data() -> pd.DataFrame:
         st.error(f"❌ Erreur chargement dataset météo : {e}")
         return pd.DataFrame()
 
-
-# def load_historique_incendies() -> pd.DataFrame:
-#     bucket = "projet-final-lead"
-#     key = "data/historique_incendies_avec_coordonnees.csv"
-#     try:
-#         obj = s3.get_object(Bucket=bucket, Key=key)
-#         df = pd.read_csv(obj['Body'], sep=';', encoding='utf-8')
-#         return df
-#     except Exception as e:
-#         st.error(f"❌ Erreur : {e}")
-#         return pd.DataFrame()
-
-
 def load_casernes() -> pd.DataFrame:
     
     bucket = "projet-final-lead"
@@ -163,34 +150,6 @@ def load_casernes() -> pd.DataFrame:
     except Exception as e:
         st.error(f"❌ Erreur : {e}")
         return pd.DataFrame()
-
-
-# def load_data() -> pd.DataFrame:
-    
-#     bucket = "projet-final-lead"
-#     key = "data/Incendies_2006_2024.csv"
-#     try:
-#         obj = s3.get_object(Bucket=bucket, Key=key)
-#         content = obj["Body"].read().decode("utf-8")
-#         df = pd.read_csv(StringIO(content), sep=";", encoding="utf-8", skiprows=3)
-#         return df
-#     except Exception as e:
-#         st.error(f"❌ Erreur : {e}")
-#         return pd.DataFrame()
-
-
-# def load_coords() -> pd.DataFrame:
-    
-#     bucket = "projet-final-lead"
-#     key = "data/coordonnees_villes.csv"
-#     try:
-#         obj = s3.get_object(Bucket=bucket, Key=key)
-#         content = obj["Body"].read().decode("utf-8")
-#         df = pd.read_csv(StringIO(content), sep=",", encoding="utf-8")
-#         return df
-#     except Exception as e:
-#         st.error(f"❌ Erreur : {e}")
-#         return pd.DataFrame()
 
 #-------------------------------------------------------- Chargement unique du modèle ---------------------------------------------------
 mlflow.set_tracking_uri("https://djohell-ml-flow.hf.space")
@@ -329,74 +288,17 @@ Le Code forestier encadre leur gestion durable pour protéger la biodiversité, 
 with page_tabs[1]:
     st.subheader("🗺️ 1. Visualisation des incendies entre 2006 et 2024")
 
-    # df_model = load_data()                     
-    # df_coords = load_coords()                   
-    # df_historique = load_historique_incendies() 
-
-    # # Vérifications
-    # if df_model.empty:
-    #     st.warning("⚠️ Dataset incendies 2006-2024 vide")
-    # if df_coords.empty:
-    #     st.warning("⚠️ Dataset coordonnées villes vide")
-    # if df_historique.empty:
-    #     st.warning("⚠️ Dataset historique incendies vide")
-
-    # # ---------------------------------------------------------------
-    # # Carte des communes
-    
-    # if not df_coords.empty:
-    #     fig = px.scatter_map(
-    #         df_coords, 
-    #         lat="latitude", 
-    #         lon="longitude", 
-    #         hover_name="ville",
-    #         height=800,
-    #         zoom=4.5,
-    #         map_style="carto-positron",
-    #         title="Carte interactive des communes touchées par des incendies (2006-2024)"
-    #     )
-    #     st.plotly_chart(fig, use_container_width=True)
-
     image = Image.open("images/incendies.png")
     st.image(
     image,
     use_container_width=True
     )
     
-
     st.write("""---""")
 
-    # ---------------------------------------------------------------
-    # DBSCAN Clustering
+    # ----------- DBSCAN Clustering -------------------------------
     st.subheader("🔥 2. Détection des clusters d'incendies")
-    # if not df_historique.empty:
-    #     commune_counts = df_historique.groupby(['Nom de la commune', 'latitude', 'longitude']).size().reset_index(name='frequence')
-    #     df_expanded = commune_counts.loc[commune_counts.index.repeat(commune_counts['frequence'])].reset_index(drop=True)
-
-    #     X = df_expanded[['latitude', 'longitude']]
-    #     coords_rad = np.radians(X)
-    #     kms_per_radian = 6371.0088
-    #     eps_km = 5
-    #     eps = eps_km / kms_per_radian
-
-    #     db = DBSCAN(eps=eps, min_samples=20, metric='haversine').fit(coords_rad)
-    #     df_expanded['cluster'] = db.labels_
-
-    #     clustered_data = df_expanded[df_expanded['cluster'] != -1]
-
-    #     fig = px.scatter_map(
-    #         clustered_data,
-    #         lat="latitude",
-    #         lon="longitude",
-    #         color="cluster",
-    #         hover_name="Nom de la commune",
-    #         zoom=5,
-    #         height=800,
-    #         title="🔥 Clusters d'incendies en France (2006-2024) détectés par DBSCAN",
-    #         map_style="carto-positron"
-    #     )
-    #     st.plotly_chart(fig, use_container_width=True)
-
+    
     image = Image.open("images/clustering.png")
     st.image(
     image,
@@ -414,31 +316,7 @@ with page_tabs[1]:
     # ---------------------------------------------------------------
     # Histogramme mensuel
     st.subheader("3. Cumul des incendies mensuels par année")
-    # if not df_historique.empty:
-    #     df_temp = df_historique.copy()
-    #     df_temp['Date'] = pd.to_datetime(df_temp['Date'], errors='coerce')
-    #     df_temp = df_temp.dropna(subset=['Date'])
-    #     df_temp['mois'] = df_temp['Date'].dt.month
-    #     df_temp['année'] = df_temp['Date'].dt.year
-
-    #     mois_abbr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    #                  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    #     df_temp['mois_nom'] = df_temp['mois'].apply(lambda x: mois_abbr[x - 1])
-    #     df_temp['mois_nom'] = pd.Categorical(df_temp['mois_nom'], categories=mois_abbr, ordered=True)
-
-    #     df_grouped = df_temp.groupby(['mois_nom', 'année']).size().reset_index(name='nombre_feux')
-
-    #     fig = px.bar(
-    #         df_grouped,
-    #         x='mois_nom',
-    #         y='nombre_feux',
-    #         color='année',
-    #         barmode='group',
-    #         height=600,
-    #         width=1000
-    #     )
-    #     st.plotly_chart(fig, use_container_width=True)
-
+    
     image = Image.open("images/saison.png")
     st.image(
     image,
@@ -458,32 +336,6 @@ with page_tabs[1]:
     use_container_width=True
     )
 
-    # df_histo = load_historique_incendies()
-
-    # if df_histo.empty:
-    #     st.warning("⚠️ Dataset historique incendies vide.")
-    # else:
-
-    #     if "Nature" in df_histo.columns:
-    #         causes = df_histo['Nature'].value_counts()
-
-    #         fig, ax = plt.subplots(figsize=(3.5, 3.5), dpi=80)
-    #         ax.pie(
-    #             causes.values,
-    #             labels=causes.index,
-    #             autopct='%1.0f%%',
-    #             startangle=140
-    #         )
-            
-    #         ax.axis('equal')
-
-    #         col1, col2, col3 = st.columns([1, 1, 1])
-
-    #         with col2:
-    #             st.pyplot(fig)
-    #     else:
-    #         st.warning("⚠️ La colonne 'Nature' est absente du DataFrame.")
-
     st.info("""
     📌 **À retenir** : 
     L’analyse des causes révèle que la majorité des incendies sont d’origine humaine, soulignant l’importance de la prévention et de la sensibilisation pour réduire ces incidents.""")
@@ -491,27 +343,6 @@ with page_tabs[1]:
     st.write("""---""")
 
         # ---------------------------------------------------- Nombre total d’incendies par année ----------------------------------
-        # if "Date" in df_histo.columns:
-        #     st.subheader("5. Evolution du nombre d’incendies par an")
-        #     df_temp = df_histo.copy()
-        #     df_temp['Date'] = pd.to_datetime(df_temp['Date'], errors='coerce')
-        #     df_temp = df_temp.dropna(subset=['Date'])
-        #     df_temp['année'] = df_temp['Date'].dt.year
-        #     df_grouped = df_temp.groupby('année').size().reset_index(name='nombre_feux')
-
-        #     fig = px.bar(
-        #         df_grouped,
-        #         x='année',
-        #         y='nombre_feux',
-        #         height=600,
-        #         text='nombre_feux'
-        #     )
-        #     fig.update_xaxes(tickmode='linear', dtick=1)
-        #     fig.update_layout(xaxis_title='Année', yaxis_title='Nombre de feux', xaxis_tickangle=0)
-        #     st.plotly_chart(fig)
-        # else:
-        #     st.warning("⚠️ La colonne 'Date' est absente du DataFrame.")
-
     image = Image.open("images/cumul_annuel.png")
     st.image(
     image,
@@ -523,41 +354,6 @@ with page_tabs[1]:
 
         # ---------------------------------------------------- Top départements
     st.subheader("6. Les 10 départements les plus touchés 🔥")
-
-    # # Chargement du dataset historique incendies
-    # df_temp = load_historique_incendies()
-
-    # if df_temp.empty:
-    #     st.warning("⚠️ Le dataset historique incendies est vide.")
-    # elif "Département" not in df_temp.columns:
-    #     st.error("❌ La colonne 'Département' est absente du DataFrame.")
-    # else:
-    #     # Regroupement par département
-    #     df_grouped = df_temp.groupby('Département').size().reset_index(name='nombre_feux')
-
-    #     # Classement décroissant et sélection du top 10
-    #     df_top10 = df_grouped.sort_values(by='nombre_feux', ascending=False).head(10)
-
-    #     # Graphique en barres
-    #     fig = px.bar(
-    #         df_top10,
-    #         x='Département',
-    #         y='nombre_feux',
-    #         height=600,
-    #         width=1000,
-    #         text='nombre_feux'
-    #     )
-
-    #     fig.update_layout(
-    #         template='plotly_white',
-    #         xaxis_title='Département',
-    #         yaxis_title='Nombre de feux',
-    #         xaxis_tickangle=-45,
-    #     )
-
-    #     fig.update_traces(textposition='outside')
-
-    #     st.plotly_chart(fig)
 
     image = Image.open("images/departement.png")
     st.image(
