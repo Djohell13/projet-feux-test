@@ -493,40 +493,47 @@ Les départements les plus touchés concentrent une part disproportionnée des i
         # ---------------------------------------------------- Top départements
     st.subheader("6. Les 10 départements les plus touchés 🔥")
 
-    # Chargement du dataset historique incendies
-    df_temp = load_historique_incendies()
+    # # Chargement du dataset historique incendies
+    # df_temp = load_historique_incendies()
 
-    if df_temp.empty:
-        st.warning("⚠️ Le dataset historique incendies est vide.")
-    elif "Département" not in df_temp.columns:
-        st.error("❌ La colonne 'Département' est absente du DataFrame.")
-    else:
-        # Regroupement par département
-        df_grouped = df_temp.groupby('Département').size().reset_index(name='nombre_feux')
+    # if df_temp.empty:
+    #     st.warning("⚠️ Le dataset historique incendies est vide.")
+    # elif "Département" not in df_temp.columns:
+    #     st.error("❌ La colonne 'Département' est absente du DataFrame.")
+    # else:
+    #     # Regroupement par département
+    #     df_grouped = df_temp.groupby('Département').size().reset_index(name='nombre_feux')
 
-        # Classement décroissant et sélection du top 10
-        df_top10 = df_grouped.sort_values(by='nombre_feux', ascending=False).head(10)
+    #     # Classement décroissant et sélection du top 10
+    #     df_top10 = df_grouped.sort_values(by='nombre_feux', ascending=False).head(10)
 
-        # Graphique en barres
-        fig = px.bar(
-            df_top10,
-            x='Département',
-            y='nombre_feux',
-            height=600,
-            width=1000,
-            text='nombre_feux'
-        )
+    #     # Graphique en barres
+    #     fig = px.bar(
+    #         df_top10,
+    #         x='Département',
+    #         y='nombre_feux',
+    #         height=600,
+    #         width=1000,
+    #         text='nombre_feux'
+    #     )
 
-        fig.update_layout(
-            template='plotly_white',
-            xaxis_title='Département',
-            yaxis_title='Nombre de feux',
-            xaxis_tickangle=-45,
-        )
+    #     fig.update_layout(
+    #         template='plotly_white',
+    #         xaxis_title='Département',
+    #         yaxis_title='Nombre de feux',
+    #         xaxis_tickangle=-45,
+    #     )
 
-        fig.update_traces(textposition='outside')
+    #     fig.update_traces(textposition='outside')
 
-        st.plotly_chart(fig)
+    #     st.plotly_chart(fig)
+
+    image = Image.open("images/departement.png")
+st.image(
+    image,
+    caption="Top 10 des départements les plus touchés par les incendies",
+    use_column_width=True
+)
 
     st.info("""Après analyse, la Corse se démarque nettement comme le département le plus touché par les incendies de forêt en France, justifiant ainsi notre choix de focus pour la suite de notre projet.""")
 
